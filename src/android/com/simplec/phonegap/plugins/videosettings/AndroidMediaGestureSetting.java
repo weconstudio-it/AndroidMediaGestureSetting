@@ -6,6 +6,12 @@ import android.os.Build;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaActivity;
+import android.view.View;
+import android.view.View.OnKeyListener;
+import android.view.KeyEvent;
+import android.view.KeyEvent.Callback;
+
 
 public class AndroidMediaGestureSetting extends CordovaPlugin {
 
@@ -19,17 +25,22 @@ public class AndroidMediaGestureSetting extends CordovaPlugin {
         	webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
 
         
+        final CordovaActivity act = (CordovaActivity)this.cordova.getActivity();
         
         webView.setOnKeyListener(new OnKeyListener() {
-        	Log.d(LOG_TAG, "---------------------- cazzetti1");
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-            	Log.d(LOG_TAG, "---------------------- cazzetti2");
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                	Log.d(LOG_TAG, "---------------------- cazzetti3");
                     // Do Here whatever you want 
+                	Log.d(LOG_TAG, "back");
+                	
+                	
+                	act.showWebPage("file:///android_asset/www/index.html", false, true, null);
+                	
                     return true;
                 }
-                return onKeyDown(keyCode, event); 
+                Log.d(LOG_TAG, "key down");
+                return false;
+                //return onKey(v,keyCode,event); //onKeyDown(keyCode, event); 
             } 
         });
         
