@@ -18,7 +18,25 @@ public class AndroidMediaGestureSetting extends CordovaPlugin {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
         	webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
 
-        Log.d(LOG_TAG, "setMediaPlaybackRequiresUserGesture: FALSE");
+        
+        
+        webView.setOnKeyListener(new OnKeyListener() {
+        	Log.d(LOG_TAG, "---------------------- cazzetti1");
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            	Log.d(LOG_TAG, "---------------------- cazzetti2");
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                	Log.d(LOG_TAG, "---------------------- cazzetti3");
+                    // Do Here whatever you want 
+                    return true;
+                }
+                return onKeyDown(keyCode, event); 
+            } 
+        });
+        
+        
+        
+        
+        Log.d(LOG_TAG, "setMediaPlaybackRequiresUserGesture: FALSE 123");
 
     }
 }
